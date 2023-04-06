@@ -14,6 +14,7 @@ d3.json(url).then(function(data) {
     let metaStrings = [];
     // set name to first element in list for webpage initialization
     let name = data.names[0];
+
     // loop through samples to find name
     for (sample of samples) {
         if (sample["id"] == name) {
@@ -41,6 +42,7 @@ d3.json(url).then(function(data) {
                     topOTUString.push(`OTU ${sample.otu_ids[i].toString()}`);
                 }
             }
+
             // trace for horizonatal bar chart
             let trace1 = {
                 // pushing the elements into a list reverses their order, so .reverse() will give the original order (lists started out sorted)
@@ -55,6 +57,7 @@ d3.json(url).then(function(data) {
                 title: `Top 10 OTUs for Subject ${name}`,
             };
             Plotly.newPlot("bar",traces1,layout1);
+
             // trace for bubble chart
             let trace2 = {
                 x: allOTU,
@@ -80,6 +83,7 @@ d3.json(url).then(function(data) {
             Plotly.newPlot("bubble",traces2,layout2);
         }
     }
+
     // loop through metadata to find match with name 
     for (meta of metadata) {
         if (meta["id"] == name) {
@@ -103,6 +107,7 @@ function getData() {
     let dropdownMenu = d3.select("#selDataset");
     // Assign the value of the dropdown menu option to a letiable
     let name = dropdownMenu.property("value");
+
     // run the same code as our webpage initialization but this time with "value" selected from dropdownMenu
     d3.json(url).then(function(data) {
         let samples = data.samples;
@@ -114,6 +119,7 @@ function getData() {
         let allOTU = [];
         let allLabels = [];
         let metaStrings = [];
+
         // loop through samples to find name
         for (sample of samples) {
             if (sample["id"] == name) {
@@ -141,6 +147,7 @@ function getData() {
                         topOTUString.push(`OTU ${sample.otu_ids[i].toString()}`);
                     }
                 }
+
                 // trace for horizonatal bar chart
                 let trace1 = {
                     // pushing the elements into a list reverses their order, so .reverse() will give the original order (lists started out sorted)
@@ -155,6 +162,7 @@ function getData() {
                     title: `Top 10 OTUs for Subject ${name}`,
                 };
                 Plotly.newPlot("bar",traces,layout);
+
                 // trace for bubble chart
                 let trace2 = {
                     x: allOTU,
@@ -180,6 +188,7 @@ function getData() {
                 Plotly.newPlot("bubble",traces2,layout2);
             }
         }
+        
         // loop through metadata to find match with name 
         for (meta of metadata) {
             if (meta["id"] == name) {
